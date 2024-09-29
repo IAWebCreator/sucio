@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUCIO - Meme Token</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Bangers&display=swap');
+
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #ff69b4;
+            --accent-color: #ffd700;
+            --background-color: #1a1a1a;
+            --text-color: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(26, 26, 26, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Bangers', cursive;
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            text-shadow: 2px 2px var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            opacity: 0.1;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Bangers', cursive;
+            font-size: 5rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            text-shadow: 3px 3px var(--accent-color);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 105, 180, 0.3);
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        h2 {
+            font-family: 'Bangers', cursive;
+            font-size: 3rem;
+            margin-bottom: 30px;
+            color: var(--secondary-color);
+            text-align: center;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-element {
+            position: absolute;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .tokenomics-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .tokenomics-list li {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .tokenomics-list li::before {
+            content: "🚀";
+            margin-right: 10px;
+            font-size: 1.5rem;
+        }
+
+        .how-to-buy-steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .step {
+            flex-basis: calc(50% - 15px);
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+        }
+
+        .step-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .roadmap {
+            position: relative;
+        }
+
+        .roadmap::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background-color: var(--secondary-color);
+        }
+
+        .roadmap-item {
+            position: relative;
+            margin-bottom: 50px;
+            width: 50%;
+            padding: 20px;
+        }
+
+        .roadmap-item:nth-child(odd) {
+            left: 0;
+            padding-right: 50px;
+        }
+
+        .roadmap-item:nth-child(even) {
+            left: 50%;
+            padding-left: 50px;
+        }
+
+        .roadmap-item::before {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            top: 0;
+        }
+
+        .roadmap-item:nth-child(odd)::before {
+            right: -10px;
+        }
+
+        .roadmap-item:nth-child(even)::before {
+            left: -10px;
+        }
+
+        footer {
+            background-color: rgba(26, 26, 26, 0.8);
+            padding: 50px 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .token-address {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+
+            .step {
+                flex-basis: 100%;
+            }
+
+            .roadmap::before {
+                left: 20px;
+            }
+
+            .roadmap-item {
+                width: 100%;
+                padding-left: 50px;
+            }
+
+            .roadmap-item:nth-child(even) {
+                left: 0;
+            }
+
+            .roadmap-item::before {
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">SUCIO</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#tokenomics">Tokenomics</a>
+                <a href="#how-to-buy">How to Buy</a>
+                <a href="#roadmap">Roadmap</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>SUCIO</h1>
+                <p>Dive into the world of chaos with the meme coin inspired by infamous celebrities!</p>
+                <a href="#how-to-buy" class="cta-button">Get SUCIO Now!</a>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About SUCIO</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>SUCIO is not just another meme coin – it's a wild ride through the unpredictable world of celebrity antics! Inspired by the most outrageous moments in pop culture, SUCIO brings the excitement of tabloid drama to the crypto space.</p>
+                        <p>Join the SUCIO movement and get ready to roll in the crypto dirt! With SUCIO, every day is a new adventure in the world of decentralized finance and celebrity gossip.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://placekitten.com/500/500" alt="SUCIO Mascot">
+                        <div class="floating-elements">
+                            <div class="floating-element" style="top: 10%; left: 10%;">💥</div>
+                            <div class="floating-element" style="top: 20%; right: 15%;">😂</div>
+                            <div class="floating-element" style="bottom: 15%; left: 20%;">💸</div>
+                            <div class="floating-element" style="bottom: 25%; right: 10%;">🎭</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tokenomics" class="section">
+            <div class="container">
+                <h2>TOKENOMICS</h2>
+                <ul class="tokenomics-list">
+                    <li>Total Supply: 1,000,000,000,000 SUCIO</li>
+                    <li>Liquidity Pool: 50% locked for 1 year</li>
+                    <li>Marketing Wallet: 10% for promotional activities</li>
+                    <li>Community Rewards: 5% distributed to holders</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="how-to-buy" class="section">
+            <div class="container">
+                <h2>HOW TO BUY</h2>
+                <div class="how-to-buy-steps">
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-wallet"></i></div>
+                        <h3>Step 1: Get a Wallet</h3>
+                        <p>Download a reputable Ethereum wallet like MetaMask or Trust Wallet.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fab fa-ethereum"></i></div>
+                        <h3>Step 2: Acquire ETH</h3>
+                        <p>Purchase Ethereum (ETH) from a cryptocurrency exchange like Coinbase or Binance.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-exchange-alt"></i></div>
+                        <h3>Step 3: Connect to a DEX</h3>
+                        <p>Connect your wallet to a decentralized exchange (DEX) like Uniswap or SushiSwap.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-coins"></i></div>
+                        <h3>Step 4: Swap ETH for SUCIO</h3>
+                        <p>Use the DEX's swap feature to exchange your ETH for SUCIO tokens.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="roadmap" class="section">
+            <div class="container">
+                <h2>ROADMAP</h2>
+                <div class="roadmap">
+                    <div class="roadmap-item">
+                        <h3>Phase 1: Launch & Community Building</h3>
+                        <p>We'll launch SUCIO and focus on growing a strong, engaged community of celebrity gossip enthusiasts and crypto lovers.</p>
+                    </div>
+                    <div class="roadmap-item">
+                        <h3>Phase 2: Marketing & Partnerships</h3>
+                        <p>We'll ramp up marketing efforts, partnering with influencers and meme pages to spread the word about SUCIO.</p>
+                    </div>
+                    <div class="roadmap-item">
+                        <h3>Phase 3: SUCIO NFT Collection</h3>
+                        <p>Launch a limited edition NFT collection featuring iconic celebrity moments, exclusively for SUCIO holders.</p>
+                    </div>
+                    <div class="roadmap-item">
+                        <h3>Phase 4: SUCIO DAO & Expansion</h3>
+                        <p>Implement a DAO for community governance and explore new opportunities to expand the SUCIO ecosystem.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="token-address">
+                <span>Contract Address: 0x1234567890123456789012345678901234567890</span>
+                <i class="fas fa-copy"></i>
+            </div>
+            <div class="social-links">
+                <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+                
